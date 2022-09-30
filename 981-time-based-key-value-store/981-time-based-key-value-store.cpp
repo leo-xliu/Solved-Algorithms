@@ -11,19 +11,16 @@ public:
     
     string get(string key, int timestamp) {
         int l(0), h(timemap[key].size()-1);
-        int maxi = -1;
         while (l <= h){
             int mid = (h-l)/2 +l;
-            if (timemap[key][mid].first <= timestamp){
-                maxi = max(maxi, mid);
-                l = mid+1;
-            }
+            if (timemap[key][mid].first == timestamp) return timemap[key][mid].second;
+            if (timemap[key][mid].first < timestamp) l = mid+1;
             else h = mid-1;
         }
-        if (maxi == -1){
-            return "";
+        if (h >= 0){
+            return timemap[key][h].second;
         }
-        return timemap[key][maxi].second;
+        return "";
     }
 };
 
