@@ -35,11 +35,11 @@ public:
         slow = head;
         next = cur;
         while (next){
-            cur = next;
             next = cur->next;
             cur->next = slow->next;
             slow->next = cur;
             slow = cur->next;
+            cur = next;
         }
     }
 };
