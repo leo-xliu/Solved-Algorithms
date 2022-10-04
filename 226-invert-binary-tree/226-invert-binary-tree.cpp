@@ -12,17 +12,16 @@
 class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
-        if (!root) return nullptr;
         invertTreeHelper(root);
         return root;
     }
     
     void invertTreeHelper(TreeNode* cur){
-        if (!cur->right && !cur->left) return;
+        if (!cur) return;
         TreeNode* right = cur->right;
         cur->right = cur->left;
         cur->left = right;
-        if (cur->right) invertTreeHelper(cur->right);
-        if (cur->left) invertTreeHelper(cur->left);
+        invertTreeHelper(cur->right);
+        invertTreeHelper(cur->left);
     }
 };
