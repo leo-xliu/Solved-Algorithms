@@ -13,16 +13,14 @@ class Solution {
 public:
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
         if (!root && !subRoot) return true;
+        if (!root && subRoot) return false;
         return isSubHelper(root, subRoot);
     }
     
     bool isSubHelper(TreeNode* cur, TreeNode* sub){
         if (!cur) return false; 
-        bool res = sameTree(cur, sub);
-        if (res) return true;
-        else{
-            return (isSubtree(cur->right, sub) || isSubtree(cur->left, sub));
-        }
+        if (sameTree(cur, sub)) return true;
+        return (isSubtree(cur->right, sub) || isSubtree(cur->left, sub));
     }
     
     bool sameTree(TreeNode* tree1, TreeNode* tree2){
