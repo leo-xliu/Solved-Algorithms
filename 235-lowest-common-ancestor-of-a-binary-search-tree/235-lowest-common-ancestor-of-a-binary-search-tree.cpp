@@ -15,12 +15,11 @@ public:
         int qval = q->val;
         TreeNode* cur = root;
         while (cur){
-            if (cur->val == pval || cur->val == qval) return cur;
-            if ((cur->val > pval && cur->val < qval) || (cur->val < pval && cur->val > qval)) return cur;
             if (cur->val > pval && cur->val > qval){
                 cur = cur->left;
             }
-            else cur = cur->right;
+            else if (cur->val < pval && cur->val < qval) cur = cur->right;
+            else return cur;
         }
         return cur;
     }
