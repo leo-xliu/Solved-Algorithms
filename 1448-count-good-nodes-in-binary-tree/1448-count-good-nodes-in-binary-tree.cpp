@@ -16,10 +16,9 @@ public:
     }
     int goodNodeHelper(TreeNode* cur, int pathmax){
         if (!cur) return 0;
-        if (cur->val < pathmax){
-            return(goodNodeHelper(cur->left, pathmax)+goodNodeHelper(cur->right, pathmax));
-        }
-        pathmax = max(pathmax, cur->val);
-        return(goodNodeHelper(cur->left, pathmax)+goodNodeHelper(cur->right, pathmax)+1);
+        int count = 1;
+        if (cur->val < pathmax) count--;
+        else pathmax = max(pathmax, cur->val);
+        return(goodNodeHelper(cur->left, pathmax)+goodNodeHelper(cur->right, pathmax)+count);
     }
 };
