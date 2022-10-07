@@ -12,19 +12,22 @@
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
-        vector<int> sorted; 
-        inordertrav(root, sorted);
-        for (int i = 0; i < sorted.size()-1; i++){
-            if (sorted[i] >= sorted[i+1]) return false;
-        }
-        return true;
+        TreeNode* prev = nullptr;
+        bool valid = true;
+        inordertrav(root, prev, valid);
+        return valid;
     }
     
-    void inordertrav(TreeNode* cur, vector<int> &sorted){
+    void inordertrav(TreeNode* cur, TreeNode*& prev, bool& valid){
+        if (!valid) return;
         if (!cur) return;
-        inordertrav(cur->left, sorted);
-        sorted.push_back(cur->val);
-        inordertrav(cur->right, sorted);
+        inordertrav(cur->left, prev, valid);
+        if (prev && prev->val >= cur->val){
+            valid = false;
+            return;
+        }
+        prev = cur;
+        inordertrav(cur->right, prev, valid);
     }
     
     
