@@ -13,15 +13,20 @@ class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
         int res;
-        kSmallestHelper(root, k, res);
+        bool solved = false;
+        kSmallestHelper(root, k, res, solved);
         return res;
     }
-    void kSmallestHelper(TreeNode* cur, int& k, int& res){
+    void kSmallestHelper(TreeNode* cur, int& k, int& res, bool& solved){
+        if (solved) return;
         if (!cur) return;
-        kSmallestHelper(cur->left, k, res);
+        kSmallestHelper(cur->left, k, res, solved);
         k--;
-        if (!k) res = cur->val;
-        kSmallestHelper(cur->right, k, res);
+        if (!k) {
+            res = cur->val;
+            solved = true;
+        }
+        kSmallestHelper(cur->right, k, res, solved);
     }
     //inorder traversal
     //left 
