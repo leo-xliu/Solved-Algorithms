@@ -13,26 +13,23 @@ class Solution {
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         int index = 0;
-        TreeNode* root = buildHelper(preorder, index, inorder);
+        TreeNode* root = buildHelper(preorder, index, inorder, 0, preorder.size()-1);
         return root;
         }
        
-    TreeNode* buildHelper(vector<int>& preorder, int& i, vector<int> inorder){
-        if (inorder.size() == 0) return nullptr;
+    TreeNode* buildHelper(vector<int>& preorder, int& i, vector<int>& inorder, int j, int k){
+        if (j > k) return nullptr;
         int temp = preorder[i++];
         TreeNode* cur = new TreeNode(temp);
-        vector<int> lpart;
-        vector<int> rpart;
-        int j = 0;
-        while (inorder[j] != temp){
-            lpart.push_back(inorder[j++]);
+        int mid;
+        for (int p = j; p < k; p++){
+            if (inorder[p] == temp){
+                mid = p;
+                break;
+            }
         }
-        j++;
-        while (j < inorder.size()){
-            rpart.push_back(inorder[j++]);
-        }
-        TreeNode* left = buildHelper(preorder, i, lpart);
-        TreeNode* right = buildHelper(preorder, i, rpart);
+        TreeNode* left = buildHelper(preorder, i, inorder, j, mid-1);
+        TreeNode* right = buildHelper(preorder, i, inorder, mid+1, k);
         cur->left = left;
         cur->right = right;
         return cur;
