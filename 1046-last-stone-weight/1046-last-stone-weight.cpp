@@ -1,24 +1,19 @@
 class Solution {
 public:
     int lastStoneWeight(vector<int>& stones) {
-        map<int, int> heap;
-        for (int i = 0; i < stones.size(); i++){
-            heap[stones[i]]++;
-        }
-        while (heap.size() > 1 || heap.begin()->second > 1){
-            auto p  = heap.rbegin();
-            int y = p->first;
-            int x = (p->second > 1) ? (p->first) : ((++p)->first);
-            if (heap[y] == 1) heap.erase(y);
-            else heap[y]--;
-            if (heap[x] == 1) heap.erase(x);
-            else heap[x]--;
+        priority_queue<int> pq(stones.begin(), stones.end());
+        while (pq.size() > 1){
+            int y = pq.top();
+            pq.pop();
+            int x = pq.top();
+            pq.pop();
             if (x != y){
-                heap[y-x]++;
+                y -= x;
+                pq.push(y);
             }
         }
-        if (heap.empty()) return 0;
-        return heap.begin()->first;
+        if (pq.size()) return pq.top();
+        return 0;
     }
 };
 
