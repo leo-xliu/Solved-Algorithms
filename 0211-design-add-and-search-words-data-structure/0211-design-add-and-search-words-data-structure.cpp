@@ -20,7 +20,7 @@ private:
             return node->isWord;
         }
         if (word[i] != '.') {
-            return searchHelper(word, i + 1, node->children[word[i] - 'a']);
+            return searchHelper(word, i+1, node->children[word[i]-'a']);
         }
         for (int j = 0; j < 26; j++) {
             if (searchHelper(word, i + 1, node->children[j])) {
