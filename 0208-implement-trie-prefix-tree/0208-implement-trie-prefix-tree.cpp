@@ -6,13 +6,12 @@ struct TrieNode{
 
 class Trie {
 private:
-    TrieNode* head;
+    TrieNode head;
 public:
-    Trie() {
-        head = new TrieNode(false);
+    Trie() : head(TrieNode(false)){
     }
     void insert(string word) {
-        TrieNode* node = head;
+        TrieNode* node = &head;
         int i = 0;
         for(; i < word.length(); i++){
             if (node->children.find(word[i]) == node->children.end()){
@@ -28,7 +27,7 @@ public:
     }
     
     bool search(string word) {
-        TrieNode* node = head;
+        TrieNode* node = &head;
         for(int i = 0; i < word.size(); i++){
             if (node->children.find(word[i]) == node->children.end()) return false;
             node = node->children[word[i]];
@@ -37,7 +36,7 @@ public:
     }
     
     bool startsWith(string prefix) {
-        TrieNode* node = head;
+        TrieNode* node = &head;
         for(int i = 0; i < prefix.size(); i++){
             if (node->children.find(prefix[i]) == node->children.end()) return false;
             node = node->children[prefix[i]];
