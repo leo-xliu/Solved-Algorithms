@@ -8,17 +8,15 @@ public:
         }
         int maxi = 0;
         int maxj = 0;
-        int maxlen = 0;
         for (int i = 0; i < s.size(); i++){
             dq[i][i] = true;
         }
         for (int i = 0; i < s.size()-1; i++){
             dq[i][i+1] = (s[i] == s[i+1]);
             if (dq[i][i+1]){
-                if (maxlen < 2){
+                if (maxj-maxi < 1){
                     maxi = i;
                     maxj = i+1;
-                    maxlen = 2;
                 }
             }
         }
@@ -26,10 +24,9 @@ public:
             for (int j = i + 2; j < s.size(); j++){
                 dq[i][j] = (s[i] == s[j] && dq[i+1][j-1]);
                 if (dq[i][j]){
-                    if (maxlen < j-i+1){
+                    if (maxj-maxi < j-i){
                         maxi = i;
                         maxj = j;
-                        maxlen = j-i+1;
                     }
                 }
             }
