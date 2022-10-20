@@ -16,9 +16,7 @@ public:
     }
     
     TreeNode* createBST(vector<int> nums, int start, int end){
-        if (start > end){
-            return nullptr;
-        }
+        if (start > end) return nullptr;
         int mid = (end-start)/2 + start;
         return(new TreeNode(nums[mid], createBST(nums, start, mid-1), createBST(nums, mid+1, end)));
     }
