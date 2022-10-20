@@ -20,10 +20,7 @@ public:
             return nullptr;
         }
         int mid = (end-start)/2 + start;
-        TreeNode* cur = new TreeNode(nums[mid]);
-        cur->left = createBST(nums, start, mid-1);
-        cur->right = createBST(nums, mid+1, end);
-        return cur;
+        return(new TreeNode(nums[mid], createBST(nums, start, mid-1), createBST(nums, mid+1, end)));
     }
 };
 
