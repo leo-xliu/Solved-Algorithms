@@ -9,12 +9,15 @@ public:
         if (targetsum % 2) return false;
         targetsum /= 2;
         for (int i = 0; i < nums.size(); i++){
-            unordered_set<int> temp(sums.begin(), sums.end());
+            vector<int> temp;
             if (nums[i] == targetsum) return true;
-            sums.insert(nums[i]);
-            for (auto p = temp.begin(); p != temp.end(); p++){
+            temp.push_back(nums[i]);
+            for (auto p = sums.begin(); p != sums.end(); p++){
                 if ((nums[i]+*p) == targetsum) return true;
-                sums.insert(nums[i]+*p);
+                temp.push_back(nums[i]+*p);
+            }
+            for (int j = 0; j < temp.size(); j++){
+                sums.insert(temp[j]);
             }
         }
         return false;
