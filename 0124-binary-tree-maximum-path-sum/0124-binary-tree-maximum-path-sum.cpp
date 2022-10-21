@@ -14,12 +14,10 @@ public:
     int maxPathSumHelper(TreeNode* node, int& res){
         if (!node) return 0;
         int cursum = node->val;
-        int leftsum = maxPathSumHelper(node->left, res);
-        int rightsum = maxPathSumHelper(node->right, res);
-        res = max(res, leftsum+rightsum+cursum);
-        int best = max(max(cursum+leftsum, cursum+rightsum), cursum);
-        res = max(res, best);
-        return best;
+        int leftsum = max(maxPathSumHelper(node->left, res),0);
+        int rightsum = max(maxPathSumHelper(node->right, res),0);
+        res = max(res, leftsum+cursum+rightsum);
+        return cursum+max(leftsum,rightsum);
     }
     
     int maxPathSum(TreeNode* root) {
