@@ -26,22 +26,20 @@ public:
         return res;
     }
     
-     void dfs(vector<vector<int>>& heights, vector<vector<bool>>& visited,
-        int i, int j, int m, int n) {
+     void dfs(vector<vector<int>>& heights, vector<vector<bool>>& flows, int i, int j, int m, int n) {
+        flows[i][j] = true;
         
-        visited[i][j] = true;
-        
-        if (i > 0 && !visited[i - 1][j] && heights[i - 1][j] >= heights[i][j]) {
-            dfs(heights, visited, i - 1, j, m, n);
+        if (i > 0 && !flows[i - 1][j] && heights[i - 1][j] >= heights[i][j]) {
+            dfs(heights, flows, i - 1, j, m, n);
         }
-        if (i < m - 1 && !visited[i + 1][j] && heights[i + 1][j] >= heights[i][j]) {
-            dfs(heights, visited, i + 1, j, m, n);
+        if (i < m - 1 && !flows[i + 1][j] && heights[i + 1][j] >= heights[i][j]) {
+            dfs(heights, flows, i + 1, j, m, n);
         }
-        if (j > 0 && !visited[i][j - 1] && heights[i][j - 1] >= heights[i][j]) {
-            dfs(heights, visited, i, j - 1, m, n);
+        if (j > 0 && !flows[i][j - 1] && heights[i][j - 1] >= heights[i][j]) {
+            dfs(heights, flows, i, j - 1, m, n);
         }
-        if (j < n - 1 && !visited[i][j + 1] && heights[i][j + 1] >= heights[i][j]) {
-            dfs(heights, visited, i, j + 1, m, n);
+        if (j < n - 1 && !flows[i][j + 1] && heights[i][j + 1] >= heights[i][j]) {
+            dfs(heights, flows, i, j + 1, m, n);
         }
     }
     
