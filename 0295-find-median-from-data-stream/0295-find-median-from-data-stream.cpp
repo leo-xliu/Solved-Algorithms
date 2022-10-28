@@ -13,17 +13,6 @@ public:
             maxq.push(num);
             return;
         }
-        else if (minq.empty()){
-            if (num < maxq.top()){
-                minq.push(maxq.top());
-                maxq.pop();
-                maxq.push(num);
-            }
-            else {
-                minq.push(num);
-            }
-            return;
-        }
         
         //main algo
         (num <= maxq.top()) ? (maxq.push(num)) : (minq.push(num));
