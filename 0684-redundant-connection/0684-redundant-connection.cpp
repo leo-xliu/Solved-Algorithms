@@ -11,16 +11,17 @@ public:
         }
     }
     
-    //do path compression in find
     int find(int nodeA){
         int curNode = nodeA;
-        vector<int> compresses;
         while (sets[curNode] != curNode){
-            compresses.push_back(curNode);
             curNode = sets[curNode];
         }
-        for (int i = 0; i < compresses.size(); i++){
-            sets[compresses[i]] = curNode;
+        //do path compression in find
+        int compressNode = nodeA;
+        while (sets[compressNode] != curNode){
+            int temp = sets[compressNode];
+            sets[compressNode] = curNode;
+            compressNode = temp;
         }
         return curNode;
     }
