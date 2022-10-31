@@ -14,8 +14,13 @@ public:
     //do path compression in find
     int find(int nodeA){
         int curNode = nodeA;
+        vector<int> compresses;
         while (sets[curNode] != curNode){
+            compresses.push_back(curNode);
             curNode = sets[curNode];
+        }
+        for (int i = 0; i < compresses.size(); i++){
+            sets[compresses[i]] = curNode;
         }
         return curNode;
     }
@@ -29,10 +34,10 @@ public:
         int sizeA = sizes[parentA];
         int sizeB = sizes[parentB];
         if (sizeA < sizeB){
-            this->sets[parentA] = parentB; 
+            sets[parentA] = parentB; 
         }
         else {
-            this->sets[parentB] = parentA;
+            sets[parentB] = parentA;
         }
         numComponents--;
         return true;
@@ -46,6 +51,7 @@ public:
         return numComponents;
     }
 };
+
 
 class Solution {
 public:
@@ -66,7 +72,6 @@ public:
         return res;
     }
 };
-
 
 
 //union find with path compression
