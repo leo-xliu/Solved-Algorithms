@@ -21,7 +21,7 @@ public:
     
     bool dfs(vector<unordered_set<int>>& courses, vector<bool>& visited, vector<int>& res, unordered_set<int>& ordered, int course){
         if (ordered.find(course) != ordered.end()){
-            return true;
+              return true;
         }
         if (visited[course]){
             return false;
@@ -37,10 +37,8 @@ public:
                 return false;
             }
         }
-        if (ordered.find(course) == ordered.end()){
-            res.push_back(course);
-            ordered.insert(course);
-        }
+        res.push_back(course);
+        ordered.insert(course);
         return true;
     }
 };
