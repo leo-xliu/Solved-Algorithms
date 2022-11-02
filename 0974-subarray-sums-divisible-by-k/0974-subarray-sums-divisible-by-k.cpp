@@ -23,5 +23,4 @@ public:
 //we are trying to match remainder with past remainders
 //if we match, it means there are subarrays that are divisible
 //take into account negative numbers
-//just make them positive since sign doesn't do anything in terms of divisibility
 //
