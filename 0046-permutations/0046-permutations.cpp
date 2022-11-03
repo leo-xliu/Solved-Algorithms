@@ -2,24 +2,19 @@ class Solution {
 public:
     vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> res;
-        unordered_set<int> set(nums.begin(), nums.end());
-        vector<int> curSet;
-        dfs(res, set, curSet);
+        dfs(res, nums, 0);
         return res;
     }
     
-    void dfs(vector<vector<int>>& res, unordered_set<int>& set, vector<int> curSet){
-        if (set.empty()){
-            res.push_back(curSet); 
+    void dfs(vector<vector<int>>& res, vector<int>& nums, int start){
+        if (start == nums.size()){
+            res.push_back(nums); 
             return;
         }
-        unordered_set<int> temp(set.begin(), set.end());
-        for (auto p = temp.begin(); p != temp.end(); p++){
-            set.erase(*p);
-            curSet.push_back(*p);
-            dfs(res, set, curSet);
-            curSet.pop_back();
-            set.insert(*p);
+        for (int i = start; i < nums.size(); i++){
+            swap(nums[i], nums[start]);
+            dfs(res, nums, start+1);
+            swap(nums[start], nums[i]);
         }
     }
 };
