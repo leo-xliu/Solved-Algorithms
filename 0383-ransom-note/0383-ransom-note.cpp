@@ -2,11 +2,11 @@ class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
         unordered_map<char, int> mag;
-        for (int i = 0; i < magazine.length(); i++){
-            mag[magazine[i]]++;
+        for (char letter : magazine){
+            mag[letter]++;
         }
-        for (int i = 0; i < ransomNote.length(); i++){
-            if (--mag[ransomNote[i]] < 0){
+        for (char letter : ransomNote){
+            if (--mag[letter] < 0){
                 return false;
             }
         }
