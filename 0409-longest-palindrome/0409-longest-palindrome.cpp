@@ -9,9 +9,7 @@ public:
                 map.erase(ch);
             }
         }
-        if (!map.empty()){
-            count++;
-        }
+        count += !map.empty();
         return count;
     }
 };
