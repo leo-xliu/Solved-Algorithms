@@ -16,13 +16,11 @@ public:
             return;
         }
         for (int i = start; i < candidates.size(); i++){
-            curSum.push_back(candidates[i]);
-            sum += candidates[i];
-            dfs(res, curSum, candidates, target, sum, i+1);
-            sum -= candidates[i];
-            while (i < candidates.size()-1 && candidates[i] == candidates[i+1]){
-                i++;
+            if (i > start && candidates[i] == candidates[i-1]){
+                continue;
             }
+            curSum.push_back(candidates[i]);
+            dfs(res, curSum, candidates, target, sum+candidates[i], i+1);
             curSum.pop_back();
         }
     }
