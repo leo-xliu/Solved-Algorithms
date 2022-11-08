@@ -21,21 +21,11 @@ public:
 class Solution {
 public:
     int maxDepth(Node* root) {
-        if (!root){
-            return 0;
+        if (!root) return 0;
+        int depth = 0;
+        for (auto child : root->children){
+            depth = max(depth, maxDepth(child));
         }
-        int max = 1;
-        findMax(root, 1, max);
-        return max;
-    }
-    
-    void findMax(Node* curNode, int curDepth, int& maxDepth){
-        if (curNode->children.empty()){
-            maxDepth = max(curDepth, maxDepth);
-            return;
-        }
-        for (int i = 0; i < curNode->children.size(); i++){
-            findMax(curNode->children[i], curDepth+1, maxDepth);
-        }
+        return depth+1;
     }
 };
