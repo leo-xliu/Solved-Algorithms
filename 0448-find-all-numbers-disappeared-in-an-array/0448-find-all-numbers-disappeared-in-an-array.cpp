@@ -4,15 +4,10 @@ public:
         vector<int> res;
         int mark = nums.size();
         for (int i = 0; i < mark; i++){
-            if (nums[i] <= mark){
-                if (nums[nums[i]-1] <= mark){
-                    nums[nums[i]-1] += mark;
-                }
-            }
-            else {
-                if (nums[nums[i]-1-mark] <= mark){
-                    nums[nums[i]-1-mark] += mark;
-                }
+            int isMarked = (nums[i] <= mark) ? (0) : (mark);
+            int ind = nums[i]-isMarked-1;
+            if (nums[ind] <= mark){
+                nums[ind] += mark;
             }
         }
         for (int i = 0; i < mark; i++){
