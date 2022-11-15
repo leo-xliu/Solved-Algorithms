@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<string> restoreIpAddresses(string s) {
-        if (s.length() > 12){
+        if (s.length() > 12 || s.length() < 4){
             return {};
         }
         vector<string> res;
