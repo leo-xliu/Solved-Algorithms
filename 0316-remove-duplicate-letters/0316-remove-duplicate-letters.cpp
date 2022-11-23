@@ -8,9 +8,6 @@ public:
             map[ch]++;
         }
         for (char ch: s){
-            if (map.find(ch) == map.end()){
-                continue;
-            }
             if (inRes.find(ch) == inRes.end()){
                 while (res.length() != 0 && res.back() > ch && map.find(res.back()) != map.end()){
                     inRes.erase(res.back());
