@@ -47,4 +47,8 @@ If a diagonal is less than 2 then the grid can be disconnected. Note only (0,0) 
 
 Less 1's most generally means higher chance the graph can be disconnected. 
 
+Think of the diagonals as gates. If a diagonal does not contain at least 2 openings then it can be disconnected. The reason is because if there are 0 openings then there are no paths to (n-1,m-1) without any flips. If there is exactly 1 opening for that diagonal, then it can be flipped to make it no openings. 
+
+Thus, we sum up all grid indexes that have 1's to their respective diagonals and then check if any diagonal has less than 2 openings. 
+
 
