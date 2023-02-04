@@ -51,4 +51,7 @@ Think of the diagonals as gates. If a diagonal does not contain at least 2 openi
 
 Thus, we sum up all grid indexes that have 1's to their respective diagonals and then check if any diagonal has less than 2 openings. 
 
-
+Diagonals: 
+grid = [[/ / /]
+        [/ / /]
+        [/ / /]]
