@@ -1,0 +1,50 @@
+6305. Disconnect Path in a Binary Matrix by at Most One Flip
+
+This question is presented in Leetcode Biweekly Contest 97
+The solution is adopted from Leetcode user: clonemaasterUwU
+
+
+You are given a 0-indexed m x n binary matrix grid. You can move from a cell (row, col) to any of the cells (row + 1, col) or (row, col + 1) that has the value 1. The matrix is disconnected if there is no path from (0, 0) to (m - 1, n - 1).
+
+You can flip the value of at most one (possibly none) cell. You cannot flip the cells (0, 0) and (m - 1, n - 1).
+
+Return true if it is possible to make the matrix disconnect or false otherwise.
+
+Note that flipping a cell changes its value from 0 to 1 or from 1 to 0.
+
+Input: grid = [[1,1,1]
+              ,[1,0,0]
+              ,[1,1,1]]
+Output: true
+Explanation: We can change the cell grid[1][0]. There is no path from (0, 0) to (2, 2) in the resulting grid.
+
+
+class Solution {
+public:
+    bool isPossibleToCutPath(vector<vector<int>>& grid) {
+        int n = grid.size(), m = grid[0].size();
+        vector<int> diagonal(m+n-1);
+        for(int i=0;i<m;i++){
+            for (int j=0;j<n;j++){
+                if (grid[i][j]) diagonal[i+j]++;
+            }
+        }
+        for (int i = 1; i < m+n-2; i++){
+            if (diagonal[i] < 2) return true;
+        }
+        return false;
+    }
+};
+
+Explanation: 
+This is not a search problem. We do not need to check all possible paths to see if it can ever be disconnected. Instead we can do this problem in O(n*m) using a clever trick. 
+
+Recall, we always start at (0,0) and we always must end at (n-1, m-1) if the graph is to be connected. Also, we can only go down/right of the grid which restricts the total paths immensely.
+
+We create a new data structure that captures diagonals of the grid, particularly the positive slop diagonals (/). The diagonals determine if the grid can be disconnected. 
+
+If a diagonal is less than 2 then the grid can be disconnected. Note only (0,0) and (n-1,m-1) are predeterministically less than 1 so they are included. 
+
+Less 1's most generally means higher chance the graph can be disconnected. 
+
+
